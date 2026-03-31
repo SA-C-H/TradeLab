@@ -71,14 +71,14 @@ export function AccountSelector() {
         }}
       >
         <SelectTrigger className="w-64">
-          <div className="flex items-center gap-2">
-            <Wallet className="h-4 w-4" />
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            <Wallet className="h-4 w-4 flex-shrink-0" />
             <SelectValue placeholder="Sélectionner un compte">
               {currentAccount ? (
-                <div className="flex items-center gap-2">
-                  <div className={`w-2 h-2 rounded-full ${accountTypeColors[currentAccount.account_type as keyof typeof accountTypeColors]}`} />
-                  <span className="truncate">{currentAccount.name}</span>
-                  <Badge variant="secondary" className="text-xs">
+                <div className="flex items-center gap-2 min-w-0 flex-1">
+                  <div className={`w-2 h-2 rounded-full ${accountTypeColors[currentAccount.account_type as keyof typeof accountTypeColors]} flex-shrink-0`} />
+                  <span className="truncate flex-1 min-w-0">{currentAccount.name}</span>
+                  <Badge variant="secondary" className="text-xs flex-shrink-0">
                     {accountTypeLabels[currentAccount.account_type as keyof typeof accountTypeLabels]}
                   </Badge>
                 </div>
@@ -91,10 +91,10 @@ export function AccountSelector() {
         <SelectContent>
           {accounts.map((account) => (
             <SelectItem key={account.id} value={account.id}>
-              <div className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${accountTypeColors[account.account_type as keyof typeof accountTypeColors]}`} />
-                <span>{account.name}</span>
-                <Badge variant="outline" className="text-xs">
+              <div className="flex items-center gap-2 min-w-0 flex-1">
+                <div className={`w-2 h-2 rounded-full ${accountTypeColors[account.account_type as keyof typeof accountTypeColors]} flex-shrink-0`} />
+                <span className="truncate flex-1 min-w-0">{account.name}</span>
+                <Badge variant="outline" className="text-xs flex-shrink-0">
                   {accountTypeLabels[account.account_type as keyof typeof accountTypeLabels]}
                 </Badge>
               </div>
