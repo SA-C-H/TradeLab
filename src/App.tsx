@@ -17,6 +17,7 @@ import Playbook from '@/pages/Playbook';
 import TradingPlan from '@/pages/TradingPlan';
 import Gallery from '@/pages/Gallery';
 import SettingsPage from '@/pages/SettingsPage';
+import TradingReplaySimple from '@/pages/TradingReplaySimple';
 import AIAssistant from '@/pages/AIAssistant';
 import TradingJournalSimple from '@/pages/TradingJournalSimple';
 import LoginPage from '@/pages/LoginPage';
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/playbook" element={<Playbook />} />
             <Route path="/plan" element={<TradingPlan />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/replay" element={<TradingReplaySimple />} />
             <Route path="/journal" element={<TradingJournalSimple />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/ai" element={<AIAssistant />} />
