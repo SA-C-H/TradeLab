@@ -12,6 +12,7 @@ import { useAccount } from '@/contexts/AccountContext';
 import { AccountRequiredMessage } from '@/components/AccountRequiredMessage';
 import { useI18n } from '@/hooks/use-i18n';
 import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 import { Calendar as CalendarIcon, Plus, Edit, Trash2, Search, Smile, Meh, Frown, Angry } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
@@ -256,7 +257,7 @@ export default function TradingJournalSimple() {
                       )}
                     </div>
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <span>{format(new Date(entry.date), 'dd MMMM yyyy')}</span>
+                      <span>{format(new Date(entry.date), 'dd MMMM yyyy', { locale: fr })}</span>
                     </div>
                   </div>
                   <div className="flex gap-2">
