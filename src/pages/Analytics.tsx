@@ -3,6 +3,8 @@ import { useTrades } from '@/hooks/use-trades';
 import { computeAnalyticsStats } from '@/lib/trade-stats';
 import { useSupabaseSession } from '@/hooks/use-supabase-session';
 import { useI18n } from '@/hooks/use-i18n';
+import { useAccount } from '@/contexts/AccountContext';
+import { AccountRequiredMessage } from '@/components/AccountRequiredMessage';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
@@ -11,11 +13,16 @@ const tooltipWrapperStyle = { outline: 'none', border: 'none', boxShadow: 'none'
 export default function Analytics() {
   const { t } = useI18n();
   const { ready } = useSupabaseSession();
+  const { hasAccounts } = useAccount();
   const { data: trades = [], isLoading, isError, error } = useTrades();
   const { hourData, comparisonData, emotionPnL, strategyData, dayFreq } = useMemo(
     () => computeAnalyticsStats(trades),
     [trades]
   );
+
+  if (!hasAccounts) {
+    return <AccountRequiredMessage />;
+  }
 
   const dayFreqLabeled = useMemo(
     () => dayFreq.map((d) => ({ ...d, dayLabel: t(`dayShort.${d.day}`) })),

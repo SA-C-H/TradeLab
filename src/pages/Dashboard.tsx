@@ -190,7 +190,7 @@ export default function Dashboard() {
     return hit ? hit.pnl : 0;
   }, [monthlyBuckets]);
 
-  const initialCapital = userSettings?.initialCapital ?? 1000;
+  const initialCapital = currentAccount?.initial_capital ?? userSettings?.initialCapital ?? 1000;
   const accountBalance = initialCapital + totalPnL;
 
   const equityScrollMin = useMemo(() => {

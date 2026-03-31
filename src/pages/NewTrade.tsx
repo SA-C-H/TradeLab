@@ -68,15 +68,16 @@ export default function NewTrade() {
 
   // Prefill defaults (only if user hasn't typed anything yet)
   useEffect(() => {
-    if (!userSettings) return;
+    if (!userSettings || !currentAccount) return;
     if (!riskPercent) setRiskPercent(String(userSettings.riskPerTradePercent));
-    if (!riskAmount && userSettings.initialCapital && userSettings.riskPerTradePercent) {
-      const amt = (userSettings.initialCapital * userSettings.riskPerTradePercent) / 100;
+    const capital = currentAccount.initial_capital || userSettings.initialCapital;
+    if (!riskAmount && capital && userSettings.riskPerTradePercent) {
+      const amt = (capital * userSettings.riskPerTradePercent) / 100;
       if (Number.isFinite(amt) && amt > 0) setRiskAmount(amt.toFixed(2));
     }
     // intentionally only on first load of userSettings
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userSettings]);
+  }, [userSettings, currentAccount]);
 
   useEffect(() => {
     setPlaybookChecks({});
