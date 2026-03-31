@@ -7,227 +7,293 @@ export type Json =
   | Json[]
 
 export type Database = {
-  __InternalSupabase: {
-    PostgrestVersion: "14.4"
-  }
   public: {
     Tables: {
+      [key: string]: {
+        Row: Record<string, any>;
+        Insert: Record<string, any>;
+        Update: Record<string, any>;
+      };
       accounts: {
         Row: {
-          id: string
-          user_id: string
-          name: string
-          account_type: string
-          initial_capital: number
-          currency: string
-          broker: string | null
-          is_active: boolean
-          created_at: string
-          updated_at: string
-        }
+          id: string;
+          user_id: string;
+          name: string;
+          account_type: 'real' | 'demo' | 'prop_firm' | 'paper';
+          initial_capital: number;
+          currency: string;
+          broker: string | null;
+          created_at: string;
+          updated_at: string;
+        };
         Insert: {
-          user_id: string
-          name: string
-          account_type: string
-          initial_capital: number
-          currency?: string
-          broker?: string | null
-          is_active?: boolean
-          created_at?: string
-          updated_at?: string
-        }
+          id?: string;
+          user_id: string;
+          name: string;
+          account_type: 'real' | 'demo' | 'prop_firm' | 'paper';
+          initial_capital: number;
+          currency: string;
+          broker?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
         Update: {
-          user_id?: string
-          name?: string
-          account_type?: string
-          initial_capital?: number
-          currency?: string
-          broker?: string | null
-          is_active?: boolean
-          updated_at?: string
-        }
-        Relationships: []
-      }
+          id?: string;
+          user_id?: string;
+          name?: string;
+          account_type?: 'real' | 'demo' | 'prop_farm' | 'paper';
+          initial_capital?: number;
+          currency?: string;
+          broker?: string | null;
+          updated_at?: string;
+        };
+      };
+      trading_journal: {
+        Row: {
+          id: string;
+          user_id: string;
+          account_id: string;
+          date: string;
+          title: string;
+          content: string | null;
+          mood: 'excellent' | 'good' | 'neutral' | 'bad' | 'terrible' | null;
+          tags: string[];
+          images: string[];
+          videos: string[];
+          trade_ids: string[];
+          is_private: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          account_id: string;
+          date: string;
+          title: string;
+          content?: string | null;
+          mood?: 'excellent' | 'good' | 'neutral' | 'bad' | 'terrible' | null;
+          tags?: string[];
+          images?: string[];
+          videos?: string[];
+          trade_ids?: string[];
+          is_private?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          account_id?: string;
+          date?: string;
+          title?: string;
+          content?: string | null;
+          mood?: 'excellent' | 'good' | 'neutral' | 'bad' | 'terrible' | null;
+          tags?: string[];
+          images?: string[];
+          videos?: string[];
+          trade_ids?: string[];
+          is_private?: boolean;
+          updated_at?: string;
+        };
+      };
+      journal_tags: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          color: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          color?: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          color?: string;
+        };
+      };
       playbook_conditions: {
         Row: {
-          user_id: string
-          strategy_id: string
-          id: string
-          label: string
-          description: string | null
-        }
+          id: string;
+          user_id: string;
+          strategy_id: string;
+          name: string;
+          description: string;
+          is_required: boolean;
+          created_at: string;
+        };
         Insert: {
-          user_id: string
-          strategy_id: string
-          id: string
-          label: string
-          description?: string | null
-        }
+          id?: string;
+          user_id: string;
+          strategy_id: string;
+          name: string;
+          description: string;
+          is_required: boolean;
+          created_at?: string;
+        };
         Update: {
-          user_id?: string
-          strategy_id?: string
-          id?: string
-          label?: string
-          description?: string | null
-        }
-        Relationships: []
-      }
+          id?: string;
+          user_id?: string;
+          strategy_id?: string;
+          name?: string;
+          description?: string;
+          is_required?: boolean;
+        };
+      };
       trading_strategies: {
         Row: {
-          user_id: string
-          id: string
-          name: string
-          sort_order: number
-          created_at: string
-        }
+          id: string;
+          user_id: string;
+          name: string;
+          description: string;
+          created_at: string;
+        };
         Insert: {
-          user_id: string
-          id: string
-          name: string
-          sort_order?: number
-          created_at?: string
-        }
+          id?: string;
+          user_id: string;
+          name: string;
+          description: string;
+          created_at?: string;
+        };
         Update: {
-          user_id?: string
-          id?: string
-          name?: string
-          sort_order?: number
-          created_at?: string
-        }
-        Relationships: []
-      }
+          id?: string;
+          user_id?: string;
+          name?: string;
+          description?: string;
+        };
+      };
       user_settings: {
         Row: {
-          user_id: string
-          initial_capital: number
-          risk_per_trade_percent: number
-          default_account_id: string | null
-          updated_at: string
-        }
+          user_id: string;
+          initial_capital: number;
+          risk_per_trade_percent: number;
+          default_account_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
         Insert: {
-          user_id: string
-          initial_capital?: number
-          risk_per_trade_percent?: number
-          default_account_id?: string | null
-          updated_at?: string
-        }
+          user_id: string;
+          initial_capital: number;
+          risk_per_trade_percent: number;
+          default_account_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
         Update: {
-          user_id?: string
-          initial_capital?: number
-          risk_per_trade_percent?: number
-          default_account_id?: string | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
+          user_id?: string;
+          initial_capital?: number;
+          risk_per_trade_percent?: number;
+          default_account_id?: string | null;
+          updated_at?: string;
+        };
+      };
       trades: {
         Row: {
-          id: string
-          user_id: string
-          account_id: string
-          instrument: string
-          trade_date: string
-          trade_time: string
-          session: string
-          direction: string
-          entry_price: number
-          stop_loss: number
-          take_profit: number
-          result: number
-          risk_amount: number
-          risk_percent: number
-          rr_ratio: number
-          strategy: string
-          strategy_key: string
-          reason: string
-          emotion_before: string
-          emotion_during: string
-          emotion_after: string
-          playbook_checks: Json
-          is_valid: boolean
-          images_before: Json | null
-          images_after: Json | null
-          created_at: string
-        }
+          id: string;
+          user_id: string;
+          account_id: string;
+          session: string;
+          instrument: string;
+          trade_date: string;
+          trade_time: string;
+          direction: string;
+          entry_price: number;
+          stop_loss: number;
+          take_profit: number;
+          result: string;
+          risk_percent: number;
+          risk_amount: number;
+          reason: string;
+          emotion_before: string;
+          emotion_during: string;
+          emotion_after: string;
+          strategy_id: string | null;
+          playbook_checks: Record<string, boolean>;
+          images_before: string[] | null;
+          images_after: string[] | null;
+          is_valid: boolean;
+          created_at: string;
+        };
         Insert: {
-          id?: string
-          user_id: string
-          account_id: string
-          instrument: string
-          trade_date: string
-          trade_time: string
-          session: string
-          direction: string
-          entry_price: number
-          stop_loss: number
-          take_profit: number
-          result: number
-          risk_amount: number
-          risk_percent: number
-          rr_ratio: number
-          strategy: string
-          strategy_key?: string
-          reason: string
-          emotion_before: string
-          emotion_during: string
-          emotion_after: string
-          playbook_checks?: Json
-          is_valid: boolean
-          images_before?: Json | null
-          images_after?: Json | null
-          created_at?: string
-        }
+          id?: string;
+          user_id: string;
+          account_id: string;
+          session: string;
+          instrument: string;
+          trade_date: string;
+          trade_time: string;
+          direction: string;
+          entry_price: number;
+          stop_loss: number;
+          take_profit: number;
+          result: string;
+          risk_percent: number;
+          risk_amount: number;
+          reason: string;
+          emotion_before: string;
+          emotion_during: string;
+          emotion_after: string;
+          strategy_id?: string | null;
+          playbook_checks?: Record<string, boolean>;
+          images_before?: string[] | null;
+          images_after?: string[] | null;
+          is_valid?: boolean;
+          created_at?: string;
+        };
         Update: {
-          id?: string
-          user_id?: string
-          account_id?: string
-          instrument?: string
-          trade_date?: string
-          trade_time?: string
-          session?: string
-          direction?: string
-          entry_price?: number
-          stop_loss?: number
-          take_profit?: number
-          result?: number
-          risk_amount?: number
-          risk_percent?: number
-          rr_ratio?: number
-          strategy?: string
-          strategy_key?: string
-          reason?: string
-          emotion_before?: string
-          emotion_after?: string
-          emotion_during?: string
-          playbook_checks?: Json
-          is_valid?: boolean
-          images_before?: Json | null
-          images_after?: Json | null
-          created_at?: string
-        }
-        Relationships: []
-      }
-    }
-    Views: {
-      [_ in never]: never
-    }
+          id?: string;
+          user_id?: string;
+          account_id?: string;
+          session?: string;
+          instrument?: string;
+          trade_date?: string;
+          trade_time?: string;
+          direction?: string;
+          entry_price?: number;
+          stop_loss?: number;
+          take_profit?: number;
+          result?: string;
+          risk_percent?: number;
+          risk_amount?: number;
+          reason?: string;
+          emotion_before?: string;
+          emotion_during?: string;
+          emotion_after?: string;
+          strategy_id?: string | null;
+          playbook_checks?: Record<string, boolean>;
+          images_before?: string[] | null;
+          images_after?: string[] | null;
+          is_valid?: boolean;
+        };
+      };
+    };
     Functions: {
-      [_ in never]: never
-    }
+      handle_updated_at: {
+        Args: Record<PropertyKey, never>;
+        Returns: unknown;
+      };
+    };
     Enums: {
-      [_ in never]: never
-    }
+      [key: string]: never;
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
+      [key: string]: never;
+    };
+  };
+};
 
 type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
 
 type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
 
-export type Tables<
+type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     | { schema: keyof DatabaseWithoutInternals },
